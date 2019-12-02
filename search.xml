@@ -100,11 +100,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[my new blog1 test]]></title>
-    <url>%2Fcategory%2Fmy-new-blog1-test%2F</url>
-    <content type="text"><![CDATA[the first new 1.creat a new blog test text at local mechine 2.creat this text(.md) 3.start at local mechine polish the style site: https://github.com/litten/hexo-theme-yilia]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[关于链表的学习]]></title>
     <url>%2Fcategory%2F%E5%85%B3%E4%BA%8E%E9%93%BE%E8%A1%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%2F</url>
     <content type="text"><![CDATA[关于链表的简介链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。链表由一系列结点（链表中每一个元素称为结点）组成，结点可以在运行时动态生成。每个结点包括两个部分：一个是存储数据元素的数据域，另一个是存储下一个结点地址的指针域。 相比于线性表顺序结构，操作复杂。由于不必须按顺序存储，链表在插入的时候可以达到O(1)的复杂度，比另一种线性表顺序表快得多，但是查找一个节点或者访问特定编号的节点则需要O(n)的时间，而线性表和顺序表相应的时间复杂度分别是O(logn)和O(1)。 链表基础框架 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156#include&lt;stdio.h&gt;#include&lt;stdlib.h&gt;int n=0;struct data &#123; int a; struct data *next; struct data *preview;&#125;;struct data *end;struct data *creatlist();void printlist(struct data *g);void printAdress(struct data *g);void printlistA(struct data *g);void changelist(struct data *g, int n);void addlist(struct data *g, int n);void deletelist(struct data *g, int n);int main()&#123; struct data *head; head=creatlist(); printf("%p \n",head); printlist(head); printlistA(end); changelist(head,3); printlist(head); addlist(head,3); printlist(head); printf("\n"); deletelist(head,2); printlist(head); printf("\n"); printAdress(head); return 0;&#125;struct data *creatlist()&#123; struct data* head,*p1,*p2; n=0; p1=p2=(struct data *)malloc(sizeof(struct data)); scanf("%d",&amp;p1-&gt;a); while(p1-&gt;a!=0) &#123; n++; if(n==1) &#123; head=p1; head-&gt;preview=NULL; &#125; else &#123; p1=(struct data *)malloc(sizeof(struct data)); scanf("%d",&amp;p1-&gt;a); p2-&gt;next=p1; p1-&gt;preview=p2; p2=p1; &#125; &#125; p1-&gt;next=NULL; end=p1-&gt;preview; return head;&#125;void printlist(struct data *g)&#123; struct data *p1 = g; while(p1-&gt;next!=NULL) &#123; printf(" %d ",p1-&gt;a); p1=p1-&gt;next; &#125;&#125;void printlistA(struct data *g)&#123; struct data *p1 = g; printf("\n"); while(p1-&gt;preview!=NULL) &#123; printf(" %d ",p1-&gt;a); p1=p1-&gt;preview; &#125; printf(" %d ",p1-&gt;a);&#125;void printAdress(struct data *g)&#123; struct data *p1 = g; while(p1-&gt;next!=NULL) &#123; printf(" %p ",&amp;p1); p1=p1-&gt;next; &#125;&#125;void changelist(struct data *g, int n)&#123; struct data *p1 = g; int i=1; int data; for(i; i&lt;n; i++) &#123; p1=p1-&gt;next; &#125; scanf("%d",&amp;data); p1-&gt;a=data;&#125;void addlist(struct data *g, int n)&#123; struct data *p1 = g; struct data *p2; struct data *new; int i=1; int data; for(i; i&lt;n; i++) &#123; p1=p1-&gt;next; &#125; p2=p1-&gt;next; new=(struct data *)malloc(sizeof(struct data)); scanf("%d",&amp;new-&gt;a); p1-&gt;next=new; new-&gt;next=p2;&#125;void deletelist(struct data *g, int n)&#123; struct data *p1 = g; struct data *temp; struct data *p2; int i=1; for(i; i&lt;n; i++) &#123; p1=p1-&gt;next; &#125; temp=p1-&gt;next; p2=temp-&gt;next; p1-&gt;next=p2; free(temp);&#125; 更多详情链表详解]]></content>
@@ -117,5 +112,10 @@
         <tag>链表</tag>
         <tag>数据结构</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[my new blog1 test]]></title>
+    <url>%2Fcategory%2Fmy-new-blog1-test%2F</url>
+    <content type="text"><![CDATA[the first new 1.creat a new blog test text at local mechine 2.creat this text(.md) 3.start at local mechine polish the style site: https://github.com/litten/hexo-theme-yilia]]></content>
   </entry>
 </search>

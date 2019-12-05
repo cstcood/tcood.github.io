@@ -351,7 +351,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-05T14:36:04+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-05T14:47:21+08:00">
                 2019-12-05
               </time>
             
@@ -423,7 +423,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  499
+                  500
                 </span>
               
 
@@ -461,11 +461,16 @@
 
       
         
-          
-            <h2 id="简化Josephus问题"><a href="#简化Josephus问题" class="headerlink" title="简化Josephus问题"></a>简化Josephus问题</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>  有n个人围成一圈1，2报数，报到2的人出列开始下一轮，列出出列顺序</p>
-<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"> input： n=4</span><br><span class="line"> output: 2,4,3</span><br><span class="line"></span><br><span class="line">```  </span><br><span class="line">&lt;!--more---&gt;</span><br><span class="line"></span><br><span class="line">### 解题实现</span><br><span class="line"></span><br><span class="line">   当前题目为圆桌循环，因此选用循环链表，每个链表的节点的元素用ID&lt;int&gt;作为标序。所有的节点的元素ID可分为奇数和偶数二种情况即`id=2n-1`与`ID=2n`两种情况</span><br><span class="line">   当`id=2n-1`时输出下一个节点的元素的ID 即`2n` 当`ID=2n`时删除此节点的节点的元素返回下一个节点的元素的指针即`2n+1`</span><br><span class="line">   结束条件：当删除节点最后只剩1时结束解题</span><br><span class="line"></span><br><span class="line">### 代码实现</span><br><span class="line"></span><br><span class="line">```c</span><br><span class="line"></span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">struct num</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	int ID;</span><br><span class="line">	struct num* next;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line">struct num* deletelist(struct num *pre)//通过第2n-1个节点指针删除第2n个节点 返回第2n+1个节点（结构体）指针</span><br><span class="line">&#123;</span><br><span class="line">	struct num *p1,*cur,*curt;</span><br><span class="line">	p1=pre;//第2n-1个节点</span><br><span class="line">	cur=p1-&gt;next;//第2n个节点</span><br><span class="line">	p1-&gt;next= cur-&gt;next;//第2n-1节点与第2n+1相连（断开第2n-1项与第2n项的连接）</span><br><span class="line">	curt=cur-&gt;next;//保存第2n+1节点的指针</span><br><span class="line">	free(cur);//释放第2n节点内存空间</span><br><span class="line">	return(curt);//返回第2n+1的指针</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">void solve(struct num *first)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	struct num *p1;</span><br><span class="line">	p1=first;</span><br><span class="line">	while(p1-&gt;next!=p1)//只剩一个节点就退出</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">		printf(&quot;%d &quot;,p1-&gt;next-&gt;ID);//输出第2n个节点的元素</span><br><span class="line">		p1=deletelist(p1);//删除第2n个节点返回2n+1个节点的指针</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	int n;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line"></span><br><span class="line">	struct num *first,*p1,*p2;</span><br><span class="line">	for(int i=1; i&lt;=n; i++)//生成单向链表</span><br><span class="line">	&#123;</span><br><span class="line">		p1=(struct num*)malloc(sizeof(struct num));</span><br><span class="line">		if(i==1) first=p1;//记录初始（入口）节点的位置</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line"></span><br><span class="line">			p2-&gt;next=p1;//连接节点</span><br><span class="line">		&#125;</span><br><span class="line">		p1-&gt;ID=i;//ID赋值</span><br><span class="line">		p2=p1;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	p1-&gt;next=first;//尾节点指向首节点形成循环节点</span><br><span class="line">	solve(first);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          <h2 id="简化Josephus问题"><a href="#简化Josephus问题" class="headerlink" title="简化Josephus问题"></a>简化Josephus问题</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>  有n个人围成一圈1，2报数，报到2的人出列开始下一轮，列出出列顺序</p>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p><code>input： n=4
+output: 2,4,3</code></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/category/链表详解（二）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -530,7 +535,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://f5h8hm.coding-pages.com/category/链表详解(一)/">
+    <link itemprop="mainEntityOfPage" href="http://f5h8hm.coding-pages.com/category/链表详解  (一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cstcood">
@@ -549,7 +554,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/category/链表详解(一)/" itemprop="url">链表详解（一）</a></h1>
+                <a class="post-title-link" href="/category/链表详解  (一)/" itemprop="url">链表详解 （一）</a></h1>
         
 
         <div class="post-meta">
@@ -577,7 +582,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-05T14:08:37+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-05T14:47:23+08:00">
                 2019-12-05
               </time>
             
@@ -624,7 +629,7 @@
 
           
           
-             <span id="/category/链表详解(一)/" class="leancloud_visitors" data-flag-title="链表详解（一）">
+             <span id="/category/链表详解  (一)/" class="leancloud_visitors" data-flag-title="链表详解 （一）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -665,7 +670,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  7
                 </span>
               
             </div>
@@ -691,7 +696,7 @@
 <p>  初始化<code>data</code>结构体 <code>data *next</code>存储下一个结构体函数的地址<code>data *preview</code>存储下一个结构体函数的地址<br><code>a</code>代表存储的数据<br></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/category/链表详解(一)/#more" rel="contents">
+            <a class="btn" href="/category/链表详解  (一)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
